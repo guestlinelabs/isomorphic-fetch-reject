@@ -1,10 +1,10 @@
 # isomorphic-fetch-reject
 
-This package is a mix of [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) and [fetch-reject](https://www.npmjs.com/package/fetch-reject). It's isomorphic fetch request that rejects also on HTTP error.
+This package is using [isomorphic-fetch](https://www.npmjs.com/package/isomorphic-fetch) and extends it to reject on HTTP error.
 
-> Standard fetch does not throw on HTTP errors (non-200 status code). This wrapper allows it to do so.
+> Standard fetch does not throw on HTTP errors (>= 400 status code). This wrapper allows it to do so.
 
-This package is perfect for apps that render on the server side as well as on the client side.
+This package is perfect for apps that render on both the server and the client side.
 
 ## Install
 

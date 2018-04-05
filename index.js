@@ -1,14 +1,24 @@
 require('es6-promise').polyfill();
 
 var fetch = require('isomorphic-fetch');
-var fetchReject = require('fetch-reject');
 
-var newFetch = fetchReject.createFetchReject(fetch);
+function onResponse(res) {
+  if (res.ok) {
+    return res;
+  }
+
+  var error = new Error();
+  error.status = res.status;
+  error.response = res;
+  throw error;
+}
+
+function newFetch() {
+  return fetch.apply(this, arguments).then(onResponse);
+}
 
 module.exports = newFetch;
-
-// So fetch stays consistent through the whole project
-module.exports.replaceGlobal = () => {
+module.exports.replaceGlobal = function() {
   if (typeof global !== 'undefined') {
     global.fetch = newFetch;
   }
